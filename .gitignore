@@ -1,0 +1,11 @@
+# XcodeGen generates this from project.yml
+PhoneAI.xcodeproj/
+
+# Build output
+build/
+DerivedData/
+Payload/
+*.ipa
+
+# macOS
+.DS_Store
