@@ -1,0 +1,32 @@
+{
+  "name": "PhoneAI",
+  "identifier": "com.doron.phoneai.source",
+  "sourceURL": "https://raw.githubusercontent.com/DORON1346/PhoneAI/main/apps.json",
+  "apps": [
+    {
+      "name": "PhoneAI",
+      "bundleIdentifier": "com.doron.phoneai",
+      "developerName": "Doron",
+      "subtitle": "Local AI assistant",
+      "localizedDescription": "On-device AI assistant for iPhone. Runs a local language model and replies to you.",
+      "iconURL": "https://raw.githubusercontent.com/DORON1346/PhoneAI/main/icon.png",
+      "tintColor": "1E3A8A",
+      "category": "utilities",
+      "version": "0.2.0",
+      "versionDate": "2026-06-23",
+      "versionDescription": "Phase 1: on-device AI chat (Qwen2.5 1.5B).",
+      "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.2.0/PhoneAI.ipa",
+      "size": 5365222,
+      "versions": [
+        {
+          "version": "0.2.0",
+          "date": "2026-06-23",
+          "localizedDescription": "Phase 1: on-device AI chat (Qwen2.5 1.5B).",
+          "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.2.0/PhoneAI.ipa",
+          "size": 5365222
+        }
+      ]
+    }
+  ],
+  "news": []
+}
