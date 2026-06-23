@@ -4,8 +4,8 @@ options:
   deploymentTarget:
     iOS: "17.0"
 packages:
-  MLXSwiftExamples:
-    url: https://github.com/ml-explore/mlx-swift-examples
+  LLMSwift:
+    url: https://github.com/eastriverlee/LLM.swift
     branch: main
 targets:
   PhoneAI:
@@ -14,10 +14,8 @@ targets:
     sources:
       - Sources
     dependencies:
-      - package: MLXSwiftExamples
-        product: MLXLLM
-      - package: MLXSwiftExamples
-        product: MLXLMCommon
+      - package: LLMSwift
+        product: LLM
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.doron.phoneai
