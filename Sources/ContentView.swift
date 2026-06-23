@@ -1,30 +1,44 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isListening = false
+    @StateObject private var model = ModelManager()
+    @State private var prompt = ""
 
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 12) {
             Text("PhoneAI")
                 .font(.largeTitle).bold()
-
-            Text(isListening ? "מקשיב…" : "מוכן")
-                .font(.title3)
+            Text(model.status)
+                .font(.caption)
                 .foregroundStyle(.secondary)
 
-            Button {
-                // Phase 1 will wire this button to on-device speech recognition
-                // (Apple Speech framework) and the local LLM (Qwen3 1.7B via MLX).
-                isListening.toggle()
-            } label: {
-                Image(systemName: "mic.fill")
-                    .font(.system(size: 44))
-                    .frame(width: 120, height: 120)
-                    .background(Circle().fill(.blue.opacity(0.15)))
+            ScrollView {
+                Text(model.answer.isEmpty ? "שאל אותי משהו…" : model.answer)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .textSelection(.enabled)
             }
-            .accessibilityLabel("דבר")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.gray.opacity(0.12))
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+
+            HStack(spacing: 8) {
+                TextField("כתוב הודעה…", text: $prompt, axis: .vertical)
+                    .textFieldStyle(.roundedBorder)
+                    .lineLimit(1...4)
+                Button {
+                    let p = prompt.trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard !p.isEmpty else { return }
+                    prompt = ""
+                    Task { await model.ask(p) }
+                } label: {
+                    Image(systemName: "paperplane.fill").font(.title2)
+                }
+                .disabled(!model.ready || model.generating)
+            }
         }
         .padding()
+        .task { await model.load() }
     }
 }
 
