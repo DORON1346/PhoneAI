@@ -1,16 +1,25 @@
 import Foundation
 import LLM
 
-/// On-device chat model — Gemma 3 1B (Q4_K_M GGUF) via llama.cpp.
-/// Small enough (~770MB) to fit an iPhone 13 (4GB) reliably; Gemma is multilingual.
-/// Downloaded once from the app's own GitHub release and cached locally.
+/// On-device chat model — Qwen2.5 1.5B (Q4_K_M GGUF, ~940MB) via llama.cpp.
+/// This is the model that ran well on the iPhone 13. Downloaded once from the
+/// app's own GitHub release and cached locally. On launch it also deletes any
+/// other cached .gguf models from previous experiments (frees storage).
 final class Bot: LLM {
-    static let modelRemoteURL = URL(string: "https://github.com/DORON1346/PhoneAI/releases/download/model-v3/model.gguf")!
+    static let modelRemoteURL = URL(string: "https://github.com/DORON1346/PhoneAI/releases/download/model-v1/model.gguf")!
 
     convenience init?(progress: @escaping (Double) -> Void) async {
         let fm = FileManager.default
         let dir = (try? fm.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)) ?? fm.temporaryDirectory
-        let localURL = dir.appendingPathComponent("phoneai-gemma3-1b.gguf")
+        let localURL = dir.appendingPathComponent("phoneai-qwen2.5-1.5b-q4km.gguf")
+
+        // Clean up any OTHER cached model files (e.g. earlier Gemma experiments).
+        if let files = try? fm.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil) {
+            for f in files where f.pathExtension.lowercased() == "gguf" && f.lastPathComponent != localURL.lastPathComponent {
+                try? fm.removeItem(at: f)
+                print("removed old model: \(f.lastPathComponent)")
+            }
+        }
 
         if !fm.fileExists(atPath: localURL.path) {
             do {
@@ -23,8 +32,8 @@ final class Bot: LLM {
             progress(1.0)
         }
 
-        // Gemma chat format. Ask in Hebrew -> answers in Hebrew.
-        self.init(from: localURL, template: .gemma)
+        let system = "אתה PhoneAI — עוזר AI מקומי וחכם. ענה בעברית בצורה ברורה, מדויקת וקצרה."
+        self.init(from: localURL, template: .chatML(system))
     }
 }
 
