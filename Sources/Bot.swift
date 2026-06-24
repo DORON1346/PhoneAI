@@ -1,15 +1,16 @@
 import Foundation
 import LLM
 
-/// On-device chat model — Gemma 4 E2B (Q3_K_S GGUF) via llama.cpp.
+/// On-device chat model — Gemma 3 1B (Q4_K_M GGUF) via llama.cpp.
+/// Small enough (~770MB) to fit an iPhone 13 (4GB) reliably; Gemma is multilingual.
 /// Downloaded once from the app's own GitHub release and cached locally.
 final class Bot: LLM {
-    static let modelRemoteURL = URL(string: "https://github.com/DORON1346/PhoneAI/releases/download/model-v2/model.gguf")!
+    static let modelRemoteURL = URL(string: "https://github.com/DORON1346/PhoneAI/releases/download/model-v3/model.gguf")!
 
     convenience init?(progress: @escaping (Double) -> Void) async {
         let fm = FileManager.default
         let dir = (try? fm.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)) ?? fm.temporaryDirectory
-        let localURL = dir.appendingPathComponent("phoneai-gemma4-e2b.gguf")
+        let localURL = dir.appendingPathComponent("phoneai-gemma3-1b.gguf")
 
         if !fm.fileExists(atPath: localURL.path) {
             do {
@@ -22,7 +23,7 @@ final class Bot: LLM {
             progress(1.0)
         }
 
-        // Gemma chat format (Gemma has no system turn; ask in Hebrew -> answers in Hebrew).
+        // Gemma chat format. Ask in Hebrew -> answers in Hebrew.
         self.init(from: localURL, template: .gemma)
     }
 }
