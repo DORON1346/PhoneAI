@@ -8,22 +8,22 @@
       "bundleIdentifier": "com.doron.phoneai",
       "developerName": "Doron",
       "subtitle": "Local AI assistant",
-      "localizedDescription": "On-device AI assistant for iPhone. Downloads a local language model once and replies to you in Hebrew.",
+      "localizedDescription": "On-device AI assistant for iPhone. Runs a local language model and replies to you.",
       "iconURL": "https://raw.githubusercontent.com/DORON1346/PhoneAI/main/icon.png",
       "tintColor": "1E3A8A",
       "category": "utilities",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "versionDate": "2026-06-24",
-      "versionDescription": "Gemma 3 1B — fits the device, multilingual.",
-      "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.5.0/PhoneAI.ipa",
-      "size": 5379651,
+      "versionDescription": "Back to Qwen 1.5B (stable) + auto-cleanup of old models.",
+      "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.6.0/PhoneAI.ipa",
+      "size": 5380167,
       "versions": [
         {
-          "version": "0.5.0",
+          "version": "0.6.0",
           "date": "2026-06-24",
-          "localizedDescription": "Gemma 3 1B — fits the device, multilingual.",
-          "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.5.0/PhoneAI.ipa",
-          "size": 5379651
+          "localizedDescription": "Back to Qwen 1.5B (stable) + auto-cleanup of old models.",
+          "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.6.0/PhoneAI.ipa",
+          "size": 5380167
         }
       ]
     }
