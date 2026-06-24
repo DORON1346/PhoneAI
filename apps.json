@@ -8,22 +8,22 @@
       "bundleIdentifier": "com.doron.phoneai",
       "developerName": "Doron",
       "subtitle": "Local AI assistant",
-      "localizedDescription": "On-device AI assistant for iPhone. Downloads a local language model once and replies to you.",
+      "localizedDescription": "On-device AI assistant for iPhone. Downloads a local language model once and replies to you in Hebrew.",
       "iconURL": "https://raw.githubusercontent.com/DORON1346/PhoneAI/main/icon.png",
       "tintColor": "1E3A8A",
       "category": "utilities",
-      "version": "0.2.0",
+      "version": "0.4.0",
       "versionDate": "2026-06-24",
-      "versionDescription": "Phase 1: on-device AI chat. Model downloads reliably from GitHub.",
-      "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.3.0/PhoneAI.ipa",
-      "size": 5376651,
+      "versionDescription": "Switched to Gemma 2 2B for better Hebrew.",
+      "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.4.0/PhoneAI.ipa",
+      "size": 5379751,
       "versions": [
         {
-          "version": "0.2.0",
+          "version": "0.4.0",
           "date": "2026-06-24",
-          "localizedDescription": "Phase 1: on-device AI chat. Model downloads from GitHub.",
-          "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.3.0/PhoneAI.ipa",
-          "size": 5376651
+          "localizedDescription": "Switched to Gemma 2 2B for better Hebrew.",
+          "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.4.0/PhoneAI.ipa",
+          "size": 5379751
         }
       ]
     }
