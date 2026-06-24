@@ -4,6 +4,7 @@ import LLM
 struct ContentView: View {
     @State private var bot: Bot?
     @State private var loadProgress: Double = 0
+    @State private var loadFailed = false
 
     var body: some View {
         VStack(spacing: 12) {
@@ -12,23 +13,34 @@ struct ContentView: View {
 
             if let bot {
                 ChatView(bot: bot)
+            } else if loadFailed {
+                Spacer()
+                Image(systemName: "exclamationmark.triangle").font(.largeTitle).foregroundStyle(.orange)
+                Text("טעינת המודל נכשלה").font(.headline)
+                Text("ייתכן שהמודל גדול מדי לזיכרון של המכשיר, או שגיאת רשת. סגור ופתח שוב, או דווח לי.")
+                    .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                Spacer()
             } else {
                 Spacer()
                 ProgressView(value: loadProgress) {
                     Text("טוען מודל… \(Int(loadProgress * 100))%")
                 }
                 .padding()
-                Text("בפעם הראשונה מורידים את המודל (~1GB) — זה לוקח כמה דקות")
+                Text("בפעם הראשונה מורידים את המודל — זה לוקח כמה דקות")
                     .font(.caption).foregroundStyle(.secondary)
                 Spacer()
             }
         }
         .padding()
         .task {
-            if bot == nil {
-                bot = await Bot(progress: { p in
+            if bot == nil && !loadFailed {
+                let b = await Bot(progress: { p in
                     Task { @MainActor in loadProgress = p }
                 })
+                await MainActor.run {
+                    bot = b
+                    loadFailed = (b == nil)
+                }
             }
         }
     }

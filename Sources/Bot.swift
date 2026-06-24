@@ -1,16 +1,15 @@
 import Foundation
 import LLM
 
-/// On-device chat model (Qwen2.5 1.5B, 4-bit GGUF) via llama.cpp.
-/// The model is downloaded ONCE from the app's own GitHub release (reliable,
-/// reachable from the phone) and cached locally — no Hugging Face at runtime.
+/// On-device chat model — Gemma 4 E2B (Q3_K_S GGUF) via llama.cpp.
+/// Downloaded once from the app's own GitHub release and cached locally.
 final class Bot: LLM {
-    static let modelRemoteURL = URL(string: "https://github.com/DORON1346/PhoneAI/releases/download/model-v1/model.gguf")!
+    static let modelRemoteURL = URL(string: "https://github.com/DORON1346/PhoneAI/releases/download/model-v2/model.gguf")!
 
     convenience init?(progress: @escaping (Double) -> Void) async {
         let fm = FileManager.default
         let dir = (try? fm.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)) ?? fm.temporaryDirectory
-        let localURL = dir.appendingPathComponent("phoneai-qwen2.5-1.5b-q4km.gguf")
+        let localURL = dir.appendingPathComponent("phoneai-gemma4-e2b.gguf")
 
         if !fm.fileExists(atPath: localURL.path) {
             do {
@@ -23,8 +22,8 @@ final class Bot: LLM {
             progress(1.0)
         }
 
-        let system = "אתה PhoneAI — עוזר AI מקומי וחכם. ענה בעברית בצורה ברורה, מדויקת וקצרה. אם אינך יודע, אמור זאת בכנות."
-        self.init(from: localURL, template: .chatML(system))
+        // Gemma chat format (Gemma has no system turn; ask in Hebrew -> answers in Hebrew).
+        self.init(from: localURL, template: .gemma)
     }
 }
 
