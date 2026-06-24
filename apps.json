@@ -12,14 +12,14 @@
       "iconURL": "https://raw.githubusercontent.com/DORON1346/PhoneAI/main/icon.png",
       "tintColor": "1E3A8A",
       "category": "utilities",
-      "version": "0.3.0",
+      "version": "0.2.0",
       "versionDate": "2026-06-24",
-      "versionDescription": "Phase 1: on-device AI chat. Model now downloads reliably from GitHub.",
+      "versionDescription": "Phase 1: on-device AI chat. Model downloads reliably from GitHub.",
       "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.3.0/PhoneAI.ipa",
       "size": 5376651,
       "versions": [
         {
-          "version": "0.3.0",
+          "version": "0.2.0",
           "date": "2026-06-24",
           "localizedDescription": "Phase 1: on-device AI chat. Model downloads from GitHub.",
           "downloadURL": "https://github.com/DORON1346/PhoneAI/releases/download/v0.3.0/PhoneAI.ipa",
